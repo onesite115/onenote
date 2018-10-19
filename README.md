@@ -78,13 +78,17 @@ Please navigate to `target` folder in project location and open `cucumber-html-r
    >> Due to too much time demanding and workload pressure from my regular day job, I had to skip few validations.
 
 1. Firstly, due to too much work in day job I didn't get much time to test every single requirement.
-2. Missed testing future order.
+2. Missed testing advance order.
 2. Missed testing 400 or 402, in other words when order doesn't exist we have to verify it gives necessary status code as stated in requirement.
 
 
 :pray: Appreciated if someone contacts me to know much about my experience and skill set.
 
+## Main feature file
+![main feature file](images/img1_feature.jpg)
 
+## Project structure
+![project structure](images/img2_source_structure.jpg)
 
 <br/>
 
