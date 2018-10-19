@@ -90,6 +90,9 @@ Please navigate to `target` folder in project location and open `cucumber-html-r
 ## Project structure
 ![project structure](images/img2_source_structure.jpg)
 
+## Execution from eclipse
+![eclipse execution](images/project_run_execution.jpg)
+
 <br/>
 
   
