@@ -45,7 +45,7 @@ An order has these statuses in sequence: `ASSIGNING` => `ONGOING` => `COMPLETED`
 <tr>
 &nbsp;&nbsp;</table>
   <br/><br/> 
-This work is adopted using [Karate unified test automation framework](https://github.com/intuit/karate)
+This work is adopted using [Karate unified test automation framework](https://github.com/intuit/karate).
 
 ## To execute this project:
 
@@ -65,22 +65,24 @@ Please navigate to `target` folder in project location and open `cucumber-html-r
 
 ## My thoughts on work:
 
-1. Tried to keep it as simple as possible, because I want to reusability and less maintanence.
+1. Tried to keep it as simple as possible, because I want to have reusability and less maintanence.
 2. There might one `javascript function` with in scenario steps I might repeat or unnecessarily duplicated in both scenarios, this can be moved to `reusable.js` or something like that.
-3. And some places I have java code and I want this to be as simple as possible and keep reusing it where necessary with in scenario steps.
+3. And some places I have java code and I want this to be as simple as possible and keep reusing it where necessary with in scenario steps. Java is used very little. 
+4. To validate date and time that is in response of - order placing, order assigning, order ongoing , order completed - we can use java class with method 
+   having `simpledateformat` and other classes and that can called in scenario to test or validate the date and time.
 4. The structure of this work - there will be calling feature and called feature, meaning all api's are in called feature (in respective files) and
    calling feature `e2e_orderflow.feature` is in its package.
    
 ## Things I have not tested, please see below.
 
-   >> Due to too much time demanding and workload pressure from my regular day job, I had to miss few.
+   >> Due to too much time demanding and workload pressure from my regular day job, I had to skip few validations.
 
 1. Firstly, due to too much work in day job I didn't get much time to test every single requirement.
 2. Missed testing future order.
 2. Missed testing 400 or 402, in other words when order doesn't exist we have to verify it gives necessary status code as stated in requirement.
 
 
-:point_right: Appreciated if someone contacts me to know much about my experience and skill set.
+:pray: Appreciated if someone contacts me to know much about my experience and skill set.
 
 
 
