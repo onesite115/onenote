@@ -84,7 +84,7 @@ Please navigate to `target` folder in project location and open `cucumber-html-r
 
 :pray: Appreciated if someone contacts me to know much about my experience and skill set.
 
-## Main feature file
+## Main feature file: e2e_orderflow.feature
 ![main feature file](images/img1_feature.jpg)
 
 ## Project structure
