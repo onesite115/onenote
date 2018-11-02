@@ -27,7 +27,7 @@ public class CommonUtils {
 	
 	
 	public static void main(String[] args) throws IOException {
-		System.out.println(CommonUtils.getPropValues("PLACEORDER_FILE"));
+		//System.out.println(CommonUtils.getPropValues("PLACEORDER_FILE"));
 		
 	}
 

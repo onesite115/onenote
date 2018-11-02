@@ -1,98 +1,14 @@
-###############################################################
+Feature:
 
-#Author: kmehar650@gmail.com
-                                    #### NOTE - These 7 lines are important to read. ####
-                                    
-#Comments: If you see '#' front of any line, then it is a comment.
-#ignore: If you want to run this feature with the scenario then put '#' before '@ignore' tag. You will find it above 'Scenraio Outline'.
-#Scenarios: Two scenarios executed - one with order complete and another one with order cancel.
-#Validations: The status code 404 and 422 scenarios (order not exist) are not scripted because of time.
+############################################## Scenario One with complete order #########################################
 
 
-#INFO: If you see '#INFO' then the following line will be a call to a feature file that internally calls respective api.
-#Note: You don't have to put or uncomment tag in called feature file. This is main end-2-end file and it is enough for anyone to run all apis to test.
-#Note: This is calling feature, it calls other feature files (called feature) that has individual apis.
-#Examples - For input test data, you can maintain same format to send N number of inputs. Each line is one test data set or one test case data.
-#Validations: All the validations are done in respective api call feature files. ex: see line 146 and navigate to or open feature file.
-
-###############################################################
-
-
-###############################################################
-#Keywords Summary :
-#Feature: List of scenarios.
-#Scenario: Business rule through list of steps with arguments.
-#Given: Some precondition step
-#When: Some key actions
-#Then: To observe outcomes or validation
-#And,But: To enumerate more Given,When,Then steps
-#Scenario Outline: List of steps for data-driven as an Examples and <placeholder>
-#Examples: Container for s table
-#Background: List of steps run before each of the scenarios
-#""" (Doc Strings)
-#| (Data Tables)
-#@ (Tags/Labels):To group Scenarios
-#<> (placeholder)
-#""
-## (Comments)
-#Sample Feature Definition Template
-###############################################################
-
-
-Feature: 
-        
-        This feature lets you test - create order, fetch order, and wait for driver to take order, and then driver will comlete order or cancel order.
-        To complete this scenario, this feature (calling feature) calls respective api feature (called feature) files.
-        
-        
-   			**************************************************************
-   			
-				A: My views or queries for /v1/orders - POST :
-				 
-        1. The price for total kilometers or distance is rounded to nearest decimal fraction. but there is still some confusion on how lalamove calculates.
-        2. For the point one, I decided not to do further research and rounded to nearest fraction and calculated the price.
-        3. Please see api_post_placeOrder.feature for the above two points.
-        4. For inputs - latitudes and longitudes see 'Examples' at the bottom. 
-        5. Examples - For input test data, you can maintain same format to send N number of inputs. Each line is one test data set or one test case data.
-        
-        -------------------------------------------------------
-        
-        B: My views or queries for /v1/orders/{orderID} - GET :
-        
-        1. Please see feature file - api_get_OrderDetails.feature.
-        
-        -------------------------------------------------------
-        
-        C: My views or queries for /v1/orders/{orderID}/take - PUT :
-        
-        1. Please see feature file - api_put_OngoingOrder.feature.
-        
-        -------------------------------------------------------
-        
-        D: My views or queries for /v1/orders/{orderID}/complete - PUT :
-        
-        1. Please see feature file - api_put_CompleteOrder.feature.
-        
-        -------------------------------------------------------
-        
-        E: My views or queries for /v1/orders/{orderID}/cancel - PUT :
-        
-        1. Please see feature file - api_put_CompleteOrder.feature.
-        
-        
-        **************************************************************
-        **************************************************************
-        
-        
-        
 Background:
 * def sleep = read('classpath:com/onenote/utilities/sleep.js')
 
 
-############################################## Scenario One with complete order #########################################
-
-#@scenarioWithCompleteOrder
-#@ignore
+@scenarioWithCompleteOrder
+@ignore
 Scenario Outline:
 
 
@@ -158,8 +74,8 @@ Examples:
 
 ############################################## Scenario Two with cancel order ###########################################
 
-#@scenarioWithCancelOrder
-#@ignore
+@scenarioWithCancelOrder
+@ignore
 Scenario Outline:
 
 * def input_LatLng = <latitude_longitude>

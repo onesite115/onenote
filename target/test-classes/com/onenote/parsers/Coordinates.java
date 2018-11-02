@@ -7,6 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -14,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.json.JsonObject;
 import javax.json.JsonWriter;
@@ -27,6 +34,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+
+import com.onenote.utilities.BreakTheStringInput;
 import com.onenote.utilities.CommonUtils;
 
 
@@ -39,8 +48,11 @@ public class Coordinates {
 	            throws FileNotFoundException, IOException, ParseException {
 	    	
 	    	Map<String, Double> item_sub1 = new LinkedHashMap<String, Double> ();
-	    	JSONParser parser = new JSONParser();
-            Object object = parser.parse(new FileReader(jsonFile));	            
+	    	JSONParser parser = new JSONParser();	    	
+	    	Stream<Path> matches = Files.find( Paths.get(System.getProperty("user.dir")), Integer.MAX_VALUE, (path, basicFileAttributes)-> String.valueOf(path).endsWith(jsonFile) );
+	    	//matches.forEach(c -> System.out.println("-- "+c.toAbsolutePath())) ;	    			
+            Object object = parser.parse(new FileReader(matches.findFirst().get().toAbsolutePath().toString()));	    	
+	    	//Object object =  parser.parse(jsonFile)	            ;
             JSONObject jsonObject = (JSONObject)object;
             jsonObject = emptystopsArray(jsonObject);
             JSONArray stopsArray = (JSONArray)jsonObject.get("stops");
@@ -59,8 +71,7 @@ public class Coordinates {
 	    	    {
 	    	      String[] s2 = s1.split("lng:");
 	    	      item_sub1.put("lng", Double.parseDouble(s2[1]))  ;
-	    	      stopsJsonObject.put("lng", Double.parseDouble(s2[1]));
-	    	      
+	    	      stopsJsonObject.put("lng", Double.parseDouble(s2[1]));	    	      
 	    	      JSONObject json = new JSONObject(item_sub1);
 	    	      
 	    	      stopsArray.add(item_sub1);
@@ -109,22 +120,24 @@ public class Coordinates {
 	    
 	    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
 			
-	    	/*String arg= "lat:26.344674_lng:119.124651#lat:28.344555_lng:112.154854";
 	    	
-	    	//stringSplit3( arg);
-	    	//latitudeAndLongitudeAppend("");
-	    	String jsonFile = CommonUtils.getPropValues("PLACEORDER_FILE");
-	    	System.out.println("file : "+ jsonFile);
-	    	List<String> lis = BreakTheStringInput.coordinatesToSplit(arg);
-	    	//System.out.println(lis);
-	    	latitudeAndLongitudeAppend(jsonFile , lis ) ;*/
+	    	
 	    	/*String arg= "lat:26.344674_lng:119.124651#lat:28.344555_lng:112.154854";
 	    	String jsonFile = CommonUtils.getPropValues("PLACEORDER_FILE");
 	    	System.out.println("file : "+ jsonFile);
 	    	List<String> lis = BreakTheStringInput.coordinatesToSplit(arg);
-	    	//System.out.println(lis);
-	    	latitudeAndLongitudeAppend(jsonFile , lis ) ;*/
-				
+	    	System.out.println("lat: lng ------- " + lis);
+	    	String js = "{\"stops\":[]}";
+	    	
+	    	String fileName = "payload_placeOrder.json";
+	    	JSONObject jo =latitudeAndLongitudeAppend(fileName , lis ) ;
+			System.out.println("############  "+jo);	
+			*/
+			
+			/*Stream<Path> matches = Files.find( Paths.get(System.getProperty("user.dir")), Integer.MAX_VALUE, (path, basicFileAttributes)-> String.valueOf(path).endsWith("payload_placeOrder.json") )
+			;
+			matches.forEach(c -> System.out.println("-- "+c.toAbsolutePath())) ;*/
+			
 		}
 
 }

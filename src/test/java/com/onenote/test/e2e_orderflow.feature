@@ -43,7 +43,7 @@ Feature:
         
         This feature lets you test - create order, fetch order, and wait for driver to take order, and then driver will comlete order or cancel order.
         To complete this scenario, this feature (calling feature) calls respective api feature (called feature) files.
-        Please see line 154.
+        
         
    			**************************************************************
    			
@@ -96,22 +96,11 @@ Background:
 Scenario Outline:
 
 
-* def var1 = <latitude_longitude>
-* print "var1", var1
-* def payLoadFile = "PLACEORDER_FILE"
+* def input_LatLng = <latitude_longitude>
+* print "input_LatLng", input_LatLng
 
-* def payloadPlaceOrderFilePath = 
-						  """
-						  	function(fileName)
-						  	{
-						  		var CommonUtils = Java.type('com.onenote.utilities.CommonUtils');
-						  		var placeOrderFilePath = CommonUtils.getPropValues(fileName);
-						  		return placeOrderFilePath;						  		
-						  	}
-						  """
-* def placeOrderFilePath = call payloadPlaceOrderFilePath payLoadFile
+* def fileName = 'payload_placeOrder.json'
 
-* print "payload_placeOrderFilePath : ", placeOrderFilePath
 
 * def doWork =
 							"""
@@ -125,20 +114,14 @@ Scenario Outline:
 								}
 							"""
 
-* def returnFromdoWorkFunction = doWork( placeOrderFilePath, var1)
+* def returnFromdoWorkFunction = doWork( fileName, input_LatLng)
 
 * print " payload from returnFromdoWorkFunction : ", returnFromdoWorkFunction
+
+
 * json payloadForPlacingOrderInJson = returnFromdoWorkFunction
 * print "payload from  returnFromdoWorkFunction :", payloadForPlacingOrderInJson
 
-
-### The below two lines are working but there is and issue in karate for not finding latest file, (in other words file generated during runtime is not recognized.). ###
-### To overcome this we used java call at line 116 (doWork) and it returns jsonobject, the return object is used in payload to place order. ###
-### The reason we want to do this because, we have to dynamically change our payload by picking different data from examples, please see below. ###
-### However, we still maintained dynamic data driven using java method call.
- 
-###* def payload = read('classpath:com/onenote/api/payload_placeOrder.json')
-###* print "payload :", payload
 
 
 #####INFO: call /v1/orders with above payload #####
@@ -155,11 +138,11 @@ Scenario Outline:
 
 #####INFO: call /v1/orders/{orderID}/take with above orderID in json #####
 
-* def responseFromOngoingPUTOrder = call read('classpath:com/onenote/api/api_put_OngoingOrder.feature') orderIDJSON
+* def responseFromOngoingPUTOrder = call read('classpath:com/onenote/api/api_put_ongoingOrder.feature') orderIDJSON
 
 #####INFO: call /v1/orders/{orderID}/complete with above orderID in json #####
 
-* def responseFromCompletePUTOrder = call read('classpath:com/onenote/api/api_put_CompleteOrder.feature') orderIDJSON
+* def responseFromCompletePUTOrder = call read('classpath:com/onenote/api/api_put_completeOrder.feature') orderIDJSON
 
 
 
@@ -179,23 +162,11 @@ Examples:
 #@ignore
 Scenario Outline:
 
+* def input_LatLng = <latitude_longitude>
+* print "input_LatLng", input_LatLng
 
-* def var1 = <latitude_longitude>
-* print "var1", var1
-* def payLoadFile = "PLACEORDER_FILE"
+* def fileName = 'payload_placeOrder.json'
 
-* def payloadPlaceOrderFilePath = 
-						  """
-						  	function(fileName)
-						  	{
-						  		var CommonUtils = Java.type('com.onenote.utilities.CommonUtils');
-						  		var placeOrderFilePath = CommonUtils.getPropValues(fileName);
-						  		return placeOrderFilePath;						  		
-						  	}
-						  """
-* def placeOrderFilePath = call payloadPlaceOrderFilePath payLoadFile
-
-* print "payload_placeOrderFilePath : ", placeOrderFilePath
 
 * def doWork =
 							"""
@@ -209,20 +180,13 @@ Scenario Outline:
 								}
 							"""
 
-* def returnFromdoWorkFunction = doWork( placeOrderFilePath, var1)
+* def returnFromdoWorkFunction = doWork( fileName, input_LatLng)
+
+* print " payload from returnFromdoWorkFunction : ", returnFromdoWorkFunction
 
 * print " payload from returnFromdoWorkFunction : ", returnFromdoWorkFunction
 * json payloadForPlacingOrderInJson = returnFromdoWorkFunction
 * print "payload from  returnFromdoWorkFunction :", payloadForPlacingOrderInJson
-
-
-### The below two lines are working but there is and issue in karate for not finding latest file, (in other words file generated during runtime is not recognized.). ###
-### To overcome this we used java call at line 200 (doWork) and it returns jsonobject, the return object is used in payload to place order. ###
-### The reason we want to do this because, we have to dynamically change our payload by picking different data from examples, please see below. ###
-### However, we still maintained dynamic data driven using java method call.
- 
-###* def payload = read('classpath:com/onenote/api/payload_placeOrder.json')
-###* print "payload :", payload
 
 
 #####INFO: call /v1/orders with above payload #####
@@ -239,11 +203,11 @@ Scenario Outline:
 
 #####INFO: call /v1/orders/{orderID}/take with above orderID in json #####
 
-* def responseFromOngoingPUTOrder = call read('classpath:com/onenote/api/api_put_OngoingOrder.feature') orderIDJSON
+* def responseFromOngoingPUTOrder = call read('classpath:com/onenote/api/api_put_ongoingOrder.feature') orderIDJSON
 
 #####INFO: call /v1/orders/{orderID}/cancel with above orderID in json #####
 
-* def responseFromCancelPUTOrder = call read('classpath:com/onenote/api/api_put_CancelOrder.feature') orderIDJSON
+* def responseFromCancelPUTOrder = call read('classpath:com/onenote/api/api_put_cancelOrder.feature') orderIDJSON
 
 Examples:
 |     latitude_longitude                          												                      												                               		  |
@@ -252,4 +216,4 @@ Examples:
 
 
 
-############################################## Scenario Two complete         ##############################################
+############################################## Scenario Two complete         ##############################################										                                      |
