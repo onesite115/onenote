@@ -86,6 +86,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven.surefire.version}</version>
                 <configuration>
+                 <!-- <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine> -->
+                 <useSystemClassLoader>false</useSystemClassLoader>
                     <includes>
                            <include>**/RunTest.java</include>
                     </includes>
