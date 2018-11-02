@@ -59,7 +59,9 @@ STEP 4: if you want execute both then make sure you repeat `STEP 3`, note in sce
 STEP 5: you can use `mvn clean package compiler:testCompile surefire:test` .
 ```
 
-## Note - An option `<useSystemClassLoader>false</useSystemClassLoader>` under surefire plugin in POM can be removed. But the surefire loading issue "maven-surefire-forked-vm-terminated-issue-in-windows" with openJDK8 is not fixed, yet. 
+## Small Note 
+
+An option `<useSystemClassLoader>false</useSystemClassLoader>` under surefire plugin in POM can be removed. But the surefire loading issue "maven-surefire-forked-vm-terminated-issue-in-windows" with openJDK8 is not fixed, yet. 
 
 
 ## Output Report:
